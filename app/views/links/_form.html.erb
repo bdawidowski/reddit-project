@@ -1,27 +1,33 @@
-<%= form_with(model: link, local: true) do |form| %>
-  <% if link.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(link.errors.count, "error") %> prohibited this link from being saved:</h2>
-
-      <ul>
-      <% link.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="row justify-content-sm-center">
+  <div class="col-sm-6 mt-3">
+    <div class="card">
+      <div class="card-header"><%= is_new ? "New Link" : "Update Link" %></div>
+      <div class="card-body">
+        <%= form_with(model: link, local: true) do |form| %>
+          <% if link.errors.any? %>
+            <div class="alert alert-danger">
+              <p><%= pluralize(link.errors.count, "error") %> prohibited this link from being saved:</p>
+              <ul>
+              <% link.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+            <div class="form-group">
+              <%= form.label :title, id: :link_title %>
+              <%= form.text_field :title, id: :link_title, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= form.label :url, id: :link_url %>
+              <%= form.text_field :url, id: :link_url, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= form.submit 'Submit', class: "btn btn-primary btn-sm" %>
+              <%= link_to 'Back', links_path, class: "btn btn-secondary btn-sm mr-1" %>
+            </div>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :link_title %>
   </div>
-
-  <div class="field">
-    <%= form.label :url %>
-    <%= form.text_field :url, id: :link_url %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
