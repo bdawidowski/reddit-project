@@ -1,6 +1,6 @@
 <div class="container">
   <% @links.each do |link| %>
-    <%= render 'card', link: link, is_show: false %>
+    <%= render 'card', link: link, page_type: :index %>
   <% end %>
 </div>
 

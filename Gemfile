@@ -33,7 +33,9 @@ gem 'devise'
 
 gem 'bootstrap'
 gem 'jquery-rails'
+gem "font-awesome-rails"
 
+gem 'acts_as_votable'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

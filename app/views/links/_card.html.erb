@@ -1,3 +1,4 @@
+
 <div class="card mt-2 mb-2">
   <div class="card-body">
     <h3><%= link.title %></h3>
@@ -6,10 +7,26 @@
   <div class="card-footer text-muted">
     <div>
       <%= link_to 'Visit URL', link.url, class: 'btn btn-sm btn-primary' %>
+      <% if page_type == :index %>
+        <%= link_to 'Visit Page', link_path(link), class: 'btn btn-sm btn-success' %>
+      <% end %>
+      <div class="btn-group">
+        <%= link_to like_link_path(link), method: :post, class: "btn btn-sm btn-secondary #{ current_user.voted_up_on?(link) ? 'disabled' : '' }" do %>
+          <%= fa_icon 'arrow-circle-up' %>
+          Upvote
+          <%= link.get_upvotes.size %>
+        <% end %>
+        <%= link_to dislike_link_path(link), method: :post, class: "btn btn-sm btn-secondary #{ current_user.voted_down_on?(link) ? 'disabled' : ''} " do %>
+          <%= fa_icon 'arrow-circle-down' %>
+          Downvote
+          <%= link.get_downvotes.size %>
+        <% end %>
+      </div>
+
       <% if current_user == link.user %>
         <%= link_to 'Edit', edit_link_path(link), class: 'btn btn-sm btn-secondary' %>
       <% end %>
-      <% if is_show %>
+      <% if page_type == :show %>
         <%= link_to 'Back', links_path, class: 'btn btn-sm btn-secondary' %>
       <% end %>
     </div>
